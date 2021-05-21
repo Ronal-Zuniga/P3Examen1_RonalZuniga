@@ -44,7 +44,7 @@ int Pelicula::getValoracion(){
 
 void Pelicula::setValoracion(){
 	srand ((unsigned)time(0));
-	this->valoracion = 1 + (rand() % (5 - 1));
+	this->valoracion = 1 + (rand() % (5));
 }
 
 string Pelicula::toString(){

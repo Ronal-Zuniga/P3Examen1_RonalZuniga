@@ -10,7 +10,7 @@ int submenu();
 int main() {
 	int opcion = 0;
 	HTHPlus* televisora = new HTHPlus();
-	while((opcion = menu()) != 7) {
+	while((opcion = menu()) != 8) {
 		switch(opcion) {
 			case 1: {
 				agregarPelicula(televisora);
@@ -27,10 +27,12 @@ int main() {
 							televisora->imprimir();
 							cout << "Ingrese el indice de la pelicula a modificar: ";
 							cin >> indice;
+							cin.ignore();
 							cout << "Ingrese el nuevo titulo de la pelicula: ";
-							cin >> _titulo;
+							getline(cin, _titulo);
 							televisora->modTitulo(indice, _titulo);
 							cout << "El titulo se modifico correctamente" << endl;
+							cout << endl;
 							break;
 						}
 
@@ -40,10 +42,12 @@ int main() {
 							televisora->imprimir();
 							cout << "Ingrese el indice de la pelicula a modificar: ";
 							cin >> indice;
+							cin.ignore();
 							cout << "Ingrese el nuevo director de la pelicula: ";
-							cin >> _director;
+							getline(cin, _director);
 							televisora->modDirector(indice, _director);
 							cout << "El director se modifico correctamente" << endl;
+							cout << endl;
 							break;
 						}
 
@@ -53,10 +57,12 @@ int main() {
 							televisora->imprimir();
 							cout << "Ingrese el indice de la pelicula a modificar: ";
 							cin >> indice;
+							cin.ignore();
 							cout << "Ingrese el nuevo genero de la pelicula: ";
-							cin >> _genero;
+							getline(cin, _genero);
 							televisora->modGenero(indice, _genero);
 							cout << "El titulo se modifico correctamente" << endl;
+							cout << endl;
 							break;
 						}
 
@@ -68,6 +74,7 @@ int main() {
 							cout << "Generando nueva valoracion aleatoria" << endl;
 							televisora->modValoracion(indice);
 							cout << "La valoracion se modifico correctamente" << endl;
+							cout << endl;
 							break;
 						}
 					}//fin switch submenu
@@ -82,7 +89,7 @@ int main() {
 				cin >> indice;
 				televisora->deletePelicula(indice);
 				cout << "La pelicula se ha eliminado correctamente" << endl;
-				     break;
+				break;
 			}
 
 			case 4: {
@@ -91,14 +98,24 @@ int main() {
 			}
 
 			case 5: {
+				cout << endl;
+				cout << "Lista de Peliculas segun su Genero" << endl;
+				cout << endl;
+				televisora->imprimirGenero();
+				cout << endl;
 				break;
 			}
 
 			case 6: {
+				string busqueda;
+				cout << "Ingrese una cadena para buscar en los titulos: ";
+				getline(cin, busqueda);
+				televisora->buscarPelicula(busqueda);
 				break;
 			}
 
 			case 7: {
+				televisora->imprimirValoracion();
 				break;
 			}
 		}//fin del switch
@@ -122,29 +139,30 @@ int menu() {
 	cout << endl;
 	cout << "Ingrese la opcion: ";
 	cin >> opcion;
+	cin.ignore();
 	cout << endl;
 	while(opcion <= 0 || opcion > 8) {
 		cout << "Seleccione una opcion dentro del rango" << endl;
 		cout << "Ingrese la opcion: ";
 		cin >> opcion;
+		cin.ignore();
 		cout << endl;
 	}
 	return opcion;
 }
 
 void agregarPelicula(HTHPlus* televisora) {
-	string titulo = "", director = "", genero = "";
-	cout << endl;
+	string titulo;
+	string director;
+	string genero;
 	cout << "Ingrese el titulo de la pelicula: ";
-	cin >> titulo;
-	cout << endl;
+	getline(cin, titulo);
 	cout << "Ingrese el director de la pelicula: ";
-	cin >> director;
-	cout << endl;
+	getline(cin, director);
 	cout << "Ingrese el genero de la pelicula: ";
-	cin >> genero;
-	cout << endl;
+	getline(cin, genero);
 	televisora->addPelicula(new Pelicula(titulo, director, genero));
+	cout << endl;
 	cout << "La pelicula se agrego correctamente" << endl;
 	cout << endl;
 }
@@ -160,11 +178,13 @@ int submenu() {
 	cout << endl;
 	cout << "Ingrese la opcion: ";
 	cin >> opcion;
+	cin.ignore();
 	cout << endl;
 	while(opcion <= 0 || opcion > 5) {
 		cout << "Seleccione una opcion dentro del rango" << endl;
 		cout << "Ingrese la opcion: ";
 		cin >> opcion;
+		cin.ignore();
 		cout << endl;
 	}
 	return opcion;
